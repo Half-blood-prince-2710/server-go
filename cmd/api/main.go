@@ -5,6 +5,7 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+	"time"
 )
 
 type config struct {
@@ -32,8 +33,11 @@ func main() {
 	srv := &http.Server{
 		Addr: cfg.Addr,
 		Handler: app.routes(),
+		WriteTimeout: 30* time.Second,
+		ReadTimeout: 30* time.Second,
+		IdleTimeout: time.Minute,
 	}
-	
+
 	logger.Info("server is runing at ","Addr",cfg.Addr)
 	err := srv.ListenAndServe()
 	if err!=nil {
