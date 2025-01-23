@@ -15,10 +15,13 @@ func (app *application)  createBloghandler(w http.ResponseWriter, r *http.Reques
 		ID: 1,
 		Title: "A good boy",
 		Body:"Manish gupta is the best boy",
-		Author: "Manish Gupta"
+		Author: "Manish Gupta",
 
 	}
-	
+	 err := app.writeJSON(w,http.StatusOK, envelope{"blog":blog},nil)
+	 if err !=nil {
+		
+	 }
 
 }
 
